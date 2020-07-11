@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/truncated icosahedron.obj-617e70bbc13eff01adcd8549e8eeff81.mesh"
+
+[deps]
+
+files=[ "res://.import/truncated icosahedron.obj-617e70bbc13eff01adcd8549e8eeff81.mesh" ]
+
+source_file="res://models/truncated icosahedron.obj"
+dest_files=[ "res://.import/truncated icosahedron.obj-617e70bbc13eff01adcd8549e8eeff81.mesh", "res://.import/truncated icosahedron.obj-617e70bbc13eff01adcd8549e8eeff81.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
