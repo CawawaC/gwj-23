@@ -27,5 +27,5 @@ func _ready():
 		face.connect("unselect_tiles", self, "unselect_tiles")
 
 func unselect_tiles():
-	for face in get_children():
+	for face in tiles.get_children():
 		face.unselect()
