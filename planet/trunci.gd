@@ -29,3 +29,10 @@ func _ready():
 func unselect_tiles():
 	for face in tiles.get_children():
 		face.unselect()
+
+func _input(event):
+	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(BUTTON_LEFT):
+		if event.relative != Vector2.ZERO:
+			var rot = Vector3(event.relative.y, event.relative.x, 1)
+			rot = rot.normalized()
+			rotate(rot, event.speed.length()/10000)
