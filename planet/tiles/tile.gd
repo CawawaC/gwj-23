@@ -52,14 +52,18 @@ func unselect():
 func determine_biome():
 	var mat = get_surface_material(0)
 	var col
+	var new_biome
 	if altitude <= Planet.water_level:
-		biome = Planet.Biome.Ocean
+		new_biome = Planet.Biome.Ocean
 		col = Color(.5, .5, 1)
 	else:
-		biome = Planet.Biome.Ground
+		new_biome = Planet.Biome.Ground
 		col = Color(0, altitude, 0)
 	
-	tile_yield = Planet.get_tile_yield(biome)
+	if new_biome != biome:
+		biome = new_biome
+		tile_yield.set_values(Planet.get_tile_yield(biome))
+	
 	mat.albedo_color = col
 	set_surface_material(0, mat)
 

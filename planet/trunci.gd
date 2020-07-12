@@ -17,7 +17,6 @@ func _ready():
 		var tile_yield = tile_yield_template.instance()
 		face.add_child(tile_yield)
 		
-		
 		var mdt = MeshDataTool.new()
 		mdt.create_from_surface(face.mesh, 0)
 		
