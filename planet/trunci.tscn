@@ -1,10 +1,11 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://planet/generator.gd" type="Script" id=1]
 [ext_resource path="res://planet/clickable/area.tscn" type="PackedScene" id=2]
 [ext_resource path="res://planet/trunci.gd" type="Script" id=3]
 [ext_resource path="res://planet/tiles/tile.gd" type="Script" id=4]
 [ext_resource path="res://planet/original/FrontColor_002.material" type="Material" id=5]
+[ext_resource path="res://planet/tiles.gd" type="Script" id=6]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -500,7 +501,7 @@ surfaces/0 = {
 [sub_resource type="OpenSimplexNoise" id=34]
 seed = 2
 octaves = 2
-period = 87.0
+period = 58.3
 persistence = 0.376
 lacunarity = 2.13
 
@@ -516,6 +517,7 @@ clickable_area_template = ExtResource( 2 )
 selected_material = SubResource( 1 )
 
 [node name="tiles" type="Spatial" parent="."]
+script = ExtResource( 6 )
 
 [node name="Mesh1_Model033" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
