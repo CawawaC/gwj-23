@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Tile",
 "language": "GDScript",
 "path": "res://planet/tiles/tile.gd"
+}, {
+"base": "Spatial",
+"class": "TileYield",
+"language": "GDScript",
+"path": "res://planet/tiles/yields/tile yield.gd"
 } ]
 _global_script_class_icons={
-"Tile": ""
+"Tile": "",
+"TileYield": ""
 }
 
 [application]
@@ -27,7 +33,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Time="*res://Time.gd"
-Planet="*res://Planet.gd"
+Planet="*res://Planet.tscn"
 
 [input]
 

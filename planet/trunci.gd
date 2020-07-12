@@ -4,6 +4,8 @@ onready var tiles = $tiles
 
 export (PackedScene) var clickable_area_template
 export (Material) var selected_material
+export (PackedScene) var tile_yield_template
+
 
 func _ready():
 	for face in tiles.get_children():
@@ -11,6 +13,10 @@ func _ready():
 		
 		var clickable_area_instance = clickable_area_template.instance()
 		face.add_child(clickable_area_instance)
+		
+		var tile_yield = tile_yield_template.instance()
+		face.add_child(tile_yield)
+		
 		
 		var mdt = MeshDataTool.new()
 		mdt.create_from_surface(face.mesh, 0)
