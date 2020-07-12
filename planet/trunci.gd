@@ -25,6 +25,8 @@ func _ready():
 		face.init()
 		
 		face.connect("unselect_tiles", self, "unselect_tiles")
+		
+	$generator.generate()
 
 func unselect_tiles():
 	for face in tiles.get_children():

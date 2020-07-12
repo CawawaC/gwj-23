@@ -1,5 +1,6 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=45 format=2]
 
+[ext_resource path="res://planet/generator.gd" type="Script" id=1]
 [ext_resource path="res://planet/clickable/area.tscn" type="PackedScene" id=2]
 [ext_resource path="res://planet/trunci.gd" type="Script" id=3]
 [ext_resource path="res://planet/tiles/tile.gd" type="Script" id=4]
@@ -8,7 +9,7 @@
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="ArrayMesh" id=2]
+[sub_resource type="ArrayMesh" id=39]
 surfaces/0 = {
 "aabb": AABB( -0.0228358, -0.00251798, 0.0213325, 0.0228358, 0.0263787, 0.0131844 ),
 "array_data": PoolByteArray( 59, 18, 59, 188, 123, 98, 195, 60, 42, 129, 187, 60, 211, 42, 110, 0, 197, 94, 196, 129, 237, 58, 255, 57, 37, 18, 187, 188, 12, 162, 128, 60, 148, 193, 174, 60, 211, 42, 110, 0, 197, 94, 196, 129, 237, 58, 0, 52, 37, 18, 187, 188, 134, 4, 37, 59, 213, 2, 216, 60, 211, 42, 110, 0, 197, 94, 196, 129, 237, 54, 26, 6, 59, 18, 59, 188, 178, 4, 37, 187, 215, 1, 7, 61, 211, 42, 110, 0, 197, 94, 196, 129, 60, 6, 0, 52, 0, 0, 0, 128, 226, 126, 184, 59, 162, 97, 13, 61, 211, 42, 110, 0, 197, 94, 196, 129, 25, 6, 255, 57, 0, 0, 0, 128, 41, 33, 154, 60, 2, 130, 241, 60, 211, 42, 110, 0, 197, 94, 196, 129, 237, 54, 255, 59 ),
@@ -22,6 +23,8 @@ surfaces/0 = {
 "skeleton_aabb": [  ],
 "vertex_count": 6
 }
+
+[sub_resource type="SpatialMaterial" id=42]
 
 [sub_resource type="ArrayMesh" id=3]
 surfaces/0 = {
@@ -38,6 +41,9 @@ surfaces/0 = {
 "vertex_count": 5
 }
 
+[sub_resource type="SpatialMaterial" id=41]
+albedo_color = Color( 0.196078, 0.337255, 0.603922, 1 )
+
 [sub_resource type="ArrayMesh" id=4]
 surfaces/0 = {
 "aabb": AABB( 0.0228358, -0.00563035, 0.00659216, 0.011428, 0.0213326, 0.0197764 ),
@@ -52,6 +58,9 @@ surfaces/0 = {
 "skeleton_aabb": [  ],
 "vertex_count": 5
 }
+
+[sub_resource type="SpatialMaterial" id=38]
+albedo_color = Color( 0.589844, 0.359652, 0.269577, 1 )
 
 [sub_resource type="ArrayMesh" id=5]
 surfaces/0 = {
@@ -488,6 +497,19 @@ surfaces/0 = {
 "vertex_count": 6
 }
 
+[sub_resource type="OpenSimplexNoise" id=34]
+seed = 2
+octaves = 2
+period = 87.0
+persistence = 0.376
+lacunarity = 2.13
+
+[sub_resource type="NoiseTexture" id=35]
+noise = SubResource( 34 )
+
+[sub_resource type="SpatialMaterial" id=36]
+albedo_texture = SubResource( 35 )
+
 [node name="trunci" type="Spatial"]
 script = ExtResource( 3 )
 clickable_area_template = ExtResource( 2 )
@@ -497,192 +519,200 @@ selected_material = SubResource( 1 )
 
 [node name="Mesh1_Model033" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
-mesh = SubResource( 2 )
-material/0 = null
+mesh = SubResource( 39 )
+material/0 = SubResource( 42 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model034" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 3 )
-material/0 = null
+material/0 = SubResource( 41 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model035" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 4 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model036" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 5 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model037" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 6 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model020" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 7 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model016" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 8 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model008" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 9 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model005" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 10 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model012" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 11 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model014" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 12 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model017" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 13 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model010" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 14 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model002" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 15 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model011" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 16 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model007" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 17 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model004" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 18 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model013" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 19 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model022" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 20 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model038" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 21 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model039" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 22 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model040" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 23 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model041" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 24 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model042" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 25 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model030" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 26 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model032" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 27 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model031" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 28 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model027" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 29 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model026" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 30 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model043" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 31 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model044" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 32 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
 
 [node name="Mesh1_Model028" type="MeshInstance" parent="tiles"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 33 )
-material/0 = null
+material/0 = SubResource( 38 )
 script = ExtResource( 4 )
+
+[node name="CSGSphere" type="CSGSphere" parent="."]
+visible = false
+radius = 3.80539
+material = SubResource( 36 )
+
+[node name="generator" type="Spatial" parent="."]
+script = ExtResource( 1 )
