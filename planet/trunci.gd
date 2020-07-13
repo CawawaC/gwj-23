@@ -32,6 +32,8 @@ func _ready():
 		face.connect("unselect_tiles", self, "unselect_tiles")
 		
 	$generator.generate()
+	
+	$tiles.find_adjacents()
 
 func unselect_tiles():
 	for face in tiles.get_children():

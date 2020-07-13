@@ -19,7 +19,6 @@ func layout():
 #		c.translation = Vector3(0.001*i, 0, 0)
 		var s = 0.005
 		c.translation = Vector3(s*i, 0, 0) - Vector3(s*count/2, 0, 0)
-		printt("trans ", c.translation)
 
 func set_values(tile_yield):
 	food = tile_yield.food

@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://planet/generator.gd" type="Script" id=1]
 [ext_resource path="res://planet/clickable/area.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://planet/original/FrontColor_002.material" type="Material" id=5]
 [ext_resource path="res://planet/tiles.gd" type="Script" id=6]
 [ext_resource path="res://planet/tiles/yields/tile yield.tscn" type="PackedScene" id=7]
+[ext_resource path="res://planet/tiles/cities/city.tscn" type="PackedScene" id=8]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -720,3 +721,4 @@ material = SubResource( 39 )
 
 [node name="generator" type="Spatial" parent="."]
 script = ExtResource( 1 )
+city_template = ExtResource( 8 )

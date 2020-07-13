@@ -8,12 +8,21 @@ var area
 var selected_material
 var biome
 var tile_yield
+var city
+var mdt: MeshDataTool
+var adjacent_tiles
+var sides_count
 
 signal unselect_tiles
 
 func _ready():
 	var mat = SpatialMaterial.new()
 	set_surface_material(0, mat)
+	
+	mdt = MeshDataTool.new()
+	mdt.create_from_surface(mesh, 0)
+	
+	sides_count = mdt.get_vertex_count()
 
 func _process(delta):
 	determine_biome()
@@ -29,15 +38,29 @@ func init():
 	
 #	material_override = selected_material.duplicate()
 
-func get_face_center():
-	var mdt = MeshDataTool.new()
-	mdt.create_from_surface(mesh, 0)
+func init_city():
+	city = $city
+	var model = $city/model
+	var up = Vector3.UP # the model's normal
+	city.translation = get_face_center() * 1.1
 	
+	var normal = get_face_normal()
+	var axis = up.cross(normal)
+	var theta = acos(up.dot(normal))
+	
+	printt(normal, axis, theta)
+	
+#	city.transform = city.transform.rotated(axis, theta)
+
+func get_face_center():
 	var sum = Vector3.ZERO
 	for i in range(0, mdt.get_vertex_count()):
 		sum += mdt.get_vertex(i)
 	
 	return sum / mdt.get_vertex_count()
+
+func get_face_normal():
+	return mdt.get_face_normal(0)
 
 func on_tile_clicked():
 	emit_signal("unselect_tiles")
@@ -45,6 +68,8 @@ func on_tile_clicked():
 
 func select():
 	material_override = selected_material
+#	for a in adjacent_tiles:
+#		a.material_override = selected_material
 
 func unselect():
 	material_override = null
