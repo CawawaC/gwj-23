@@ -12,8 +12,10 @@ var city
 var mdt: MeshDataTool
 var adjacent_tiles
 var sides_count
+var temperature_ratio
 
 signal unselect_tiles
+signal city_selected
 
 func _ready():
 	var mat = SpatialMaterial.new()
@@ -68,6 +70,8 @@ func on_tile_clicked():
 
 func select():
 	material_override = selected_material
+	if city:
+		emit_signal("city_selected", self)
 #	for a in adjacent_tiles:
 #		a.material_override = selected_material
 
@@ -78,12 +82,15 @@ func determine_biome():
 	var mat = get_surface_material(0)
 	var col
 	var new_biome
-	if altitude <= Planet.water_level:
+	if temperature_ratio < 0.01:
+		new_biome = Planet.Biome.Pole
+		col = Color(1, 1, 1)
+	elif altitude <= Planet.water_level:
 		new_biome = Planet.Biome.Ocean
 		col = Color(.5, .5, 1)
 	else:
 		new_biome = Planet.Biome.Ground
-		col = Color(0, altitude, 0)
+		col = Color(temperature_ratio, altitude, 0)
 	
 	if new_biome != biome:
 		biome = new_biome

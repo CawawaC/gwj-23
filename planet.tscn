@@ -13,3 +13,8 @@ industry = 1
 [node name="ground" parent="." instance=ExtResource( 2 )]
 food = 2
 industry = 1
+
+[node name="default" parent="." instance=ExtResource( 2 )]
+
+[node name="pole" parent="." instance=ExtResource( 2 )]
+industry = 1

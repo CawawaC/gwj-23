@@ -23,6 +23,7 @@ func generate():
 	
 	Planet.water_level = 0.45
 	
+	generate_poles()
 	
 	for tile in tiles.get_children():
 		tile.determine_biome()
@@ -53,3 +54,31 @@ func water_level_adjust():
 		Planet.water_level -= 0.01
 		for tile in tiles.get_children():
 			tile.determine_biome()
+
+
+func generate_poles():
+	# pick a random tile
+	var rand = randi() % tiles.get_child_count()
+	var n_pole = tiles.get_child(rand)
+	print(n_pole)
+	
+	# make it a pole
+	Planet.north_pole = n_pole
+	
+	# pick the tile with opposite normal
+	var s_pole = tiles.get_opposite(n_pole)
+	
+	# make it a pole too
+	Planet.south_pole = s_pole
+	
+	# the pole tile's normal is the planet's axis
+	Planet.axis = n_pole.get_face_normal()
+	
+	for t in tiles.get_children():
+		var normal = t.get_face_normal()
+		
+		# the longer a tile normal's projection (dot product) onto the axis is (in abs values)
+		# the colder it is
+		var projection = abs(normal.dot(Planet.axis))
+		t.temperature_ratio = 1-projection
+	

@@ -39,3 +39,20 @@ func find_adjacents():
 		for i in range(0, t.sides_count):
 			var adjacent = angles[sorted_angles[i]]
 			t.adjacent_tiles.append(adjacent)
+
+
+func get_opposite(tile):
+	var normal = tile.get_face_normal()
+	
+	var oppo
+	for t2 in get_children():
+		var mdt2 = MeshDataTool.new()
+		mdt2.create_from_surface(t2.mesh, 0)
+		var n2 = mdt2.get_face_normal(0)
+		
+		var dot = n2.dot(normal)
+		if dot < -0.99:
+			oppo = t2
+			break
+	
+	return oppo
