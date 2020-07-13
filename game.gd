@@ -15,4 +15,7 @@ func on_biome_changed(tile):
 
 func game_over():
 	defeat.show()
+	$ui/ui/defeat/center/vbox/lost/num.text = String(Player.population_dead).pad_decimals(3)
+	$ui/ui/defeat/center/vbox/saved/num.text = String(Player.population_saved).pad_decimals(3)
+	
 	Time.stop()

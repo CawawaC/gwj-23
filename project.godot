@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Spatial",
+"class": "Rocket",
+"language": "GDScript",
+"path": "res://planet/tiles/cities/rocket.gd"
+}, {
 "base": "MeshInstance",
 "class": "Tile",
 "language": "GDScript",
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://planet/tiles/yields/tile yield.gd"
 } ]
 _global_script_class_icons={
+"Rocket": "",
 "Tile": "",
 "TileYield": ""
 }

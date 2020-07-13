@@ -4,6 +4,7 @@ onready var food_num = $resources/food/num
 onready var indu_num = $resources/industry/num
 onready var pop_num = $resources/population/num
 onready var rocket_progress = $construction/rocket/progress
+onready var launch_button = $construction/rocket/launch
 
 var selected_tile
 
@@ -21,16 +22,21 @@ func _process(delta):
 	if selected_tile:
 		update_pop()
 	
-		if selected_tile.city.rocket:
-			rocket_progress.value = selected_tile.city.rocket.built_ratio * 100
+		var rocket = selected_tile.city.rocket
+		if rocket:
+			rocket_progress.value = rocket.built_ratio * 100
 			
-#			if rocket.
+			if rocket.state == Rocket.State.Built:
+				launch_button.disabled = false
+			else:
+				launch_button.disabled = true
+		
 
 func update_pop():
 	var pop = selected_tile.city.population
 	var millions = int(pop)
-	var thousands = round((pop - millions) * 1000)
-	var pop_s = String(millions) + "." + String(thousands)
+	var thousands = (pop - millions) * 1000
+	var pop_s = String(millions) + "." + String(int(thousands)).pad_zeros(3)
 	pop_num.text = pop_s
 
 func open():
@@ -39,3 +45,9 @@ func open():
 func close():
 	hide()
 	selected_tile = null
+
+func on_launch_pressed():
+	if selected_tile:
+		var rocket = selected_tile.city.rocket
+		if rocket:
+			rocket.launch()

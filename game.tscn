@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://planet/trunci.tscn" type="PackedScene" id=1]
 [ext_resource path="res://planet/tiles/yields/MelonWhiteborder2 icon.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://ui/ui.gd" type="Script" id=4]
 [ext_resource path="res://game.gd" type="Script" id=5]
 [ext_resource path="res://ui/city ui.gd" type="Script" id=6]
+[ext_resource path="res://ui/info.gd" type="Script" id=7]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -123,12 +124,13 @@ __meta__ = {
 }
 
 [node name="rocket" type="HBoxContainer" parent="ui/ui/city/construction"]
-margin_right = 220.0
-margin_bottom = 14.0
+margin_right = 278.0
+margin_bottom = 20.0
 
 [node name="label" type="Label" parent="ui/ui/city/construction/rocket"]
+margin_top = 3.0
 margin_right = 116.0
-margin_bottom = 14.0
+margin_bottom = 17.0
 text = "Rocket production"
 
 [node name="progress" type="ProgressBar" parent="ui/ui/city/construction/rocket"]
@@ -139,15 +141,12 @@ rect_min_size = Vector2( 100, 0 )
 max_value = 100.0
 step = 1.0
 
-[node name="label" type="Label" parent="ui/ui/city/construction/rocket/progress"]
-visible = false
-margin_right = 100.0
-margin_bottom = 14.0
-text = "Launch"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="launch" type="Button" parent="ui/ui/city/construction/rocket"]
+margin_left = 224.0
+margin_right = 278.0
+margin_bottom = 20.0
+disabled = true
+text = "launch"
 
 [node name="defeat" type="Control" parent="ui/ui"]
 anchor_right = 1.0
@@ -169,12 +168,126 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="label" type="Label" parent="ui/ui/defeat/center"]
-margin_left = 433.0
-margin_top = 293.0
-margin_right = 590.0
-margin_bottom = 307.0
+[node name="vbox" type="VBoxContainer" parent="ui/ui/defeat/center"]
+margin_left = 421.0
+margin_top = 263.0
+margin_right = 602.0
+margin_bottom = 337.0
+
+[node name="label" type="Label" parent="ui/ui/defeat/center/vbox"]
+margin_right = 181.0
+margin_bottom = 14.0
 text = "No cities left: game over"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="pad" type="Control" parent="ui/ui/defeat/center/vbox"]
+margin_top = 18.0
+margin_right = 181.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_vertical = 3
+
+[node name="saved" type="HBoxContainer" parent="ui/ui/defeat/center/vbox"]
+margin_top = 42.0
+margin_right = 181.0
+margin_bottom = 56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="ui/ui/defeat/center/vbox/saved"]
+margin_right = 64.0
+margin_bottom = 14.0
+text = "You saved"
+
+[node name="pad" type="Control" parent="ui/ui/defeat/center/vbox/saved"]
+margin_left = 68.0
+margin_right = 68.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="num" type="Label" parent="ui/ui/defeat/center/vbox/saved"]
+margin_left = 72.0
+margin_right = 80.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="people" type="Label" parent="ui/ui/defeat/center/vbox/saved"]
+margin_left = 84.0
+margin_right = 181.0
+margin_bottom = 14.0
+text = "milllion people"
+
+[node name="lost" type="HBoxContainer" parent="ui/ui/defeat/center/vbox"]
+margin_top = 60.0
+margin_right = 181.0
+margin_bottom = 74.0
+
+[node name="num" type="Label" parent="ui/ui/defeat/center/vbox/lost"]
+margin_right = 8.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="people" type="Label" parent="ui/ui/defeat/center/vbox/lost"]
+margin_left = 12.0
+margin_right = 141.0
+margin_bottom = 14.0
+text = "milllion people died"
+
+[node name="info" type="VBoxContainer" parent="ui/ui"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -202.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = 52.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="saved" type="HBoxContainer" parent="ui/ui/info"]
+margin_right = 182.0
+margin_bottom = 14.0
+
+[node name="label" type="Label" parent="ui/ui/info/saved"]
+margin_right = 117.0
+margin_bottom = 14.0
+text = "Population saved: "
+
+[node name="pad2" type="Control" parent="ui/ui/info/saved"]
+margin_left = 121.0
+margin_right = 170.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="num" type="Label" parent="ui/ui/info/saved"]
+margin_left = 174.0
+margin_right = 182.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="lost" type="HBoxContainer" parent="ui/ui/info"]
+margin_top = 18.0
+margin_right = 182.0
+margin_bottom = 32.0
+
+[node name="label" type="Label" parent="ui/ui/info/lost"]
+margin_right = 104.0
+margin_bottom = 14.0
+text = "Population lost: "
+
+[node name="pad" type="Control" parent="ui/ui/info/lost"]
+margin_left = 108.0
+margin_right = 170.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="num" type="Label" parent="ui/ui/info/lost"]
+margin_left = 174.0
+margin_right = 182.0
+margin_bottom = 14.0
+text = "0"
+[connection signal="pressed" from="ui/ui/city/construction/rocket/launch" to="ui/ui/city" method="on_launch_pressed"]
