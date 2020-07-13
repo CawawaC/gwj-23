@@ -62,7 +62,6 @@ func generate_poles():
 	# pick a random tile
 	var rand = randi() % tiles.get_child_count()
 	var n_pole = tiles.get_child(rand)
-	print(n_pole)
 	
 	# make it a pole
 	Planet.north_pole = n_pole

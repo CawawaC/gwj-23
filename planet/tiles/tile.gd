@@ -60,8 +60,6 @@ func init_city():
 	var axis = up.cross(normal).normalized()
 	var theta = acos(up.dot(normal))
 	
-	printt(axis, theta)
-	
 	city.rotate_object_local(axis, theta)
 	city.scale = Vector3(1, 1, 1)
 
