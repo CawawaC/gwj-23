@@ -1,12 +1,13 @@
 extends Spatial
 
+var cities_count setget , get_cities_count
+
 func tiles_count(biome):
 	var c = 0
 	for t in get_children():
 		if t.biome == biome:
 			c += 1
 	return c
-
 
 func find_adjacents():
 	for t in get_children():
@@ -56,3 +57,9 @@ func get_opposite(tile):
 			break
 	
 	return oppo
+
+func get_cities_count():
+	var sum = 0
+	for t in get_children():
+		if t.city: sum += 1
+	return sum

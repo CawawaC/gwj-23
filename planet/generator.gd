@@ -38,7 +38,9 @@ func place_cities():
 	var city_tiles_i = []
 	for i in range(0, cities_to_place):
 		var rand = randi() % tiles.get_child_count()
-		while city_tiles_i.has(rand) or tiles.get_child(rand).biome == Planet.Biome.Ocean:
+		while city_tiles_i.has(rand) \
+		or tiles.get_child(rand).biome == Planet.Biome.Ocean \
+		or tiles.get_child(rand).biome == Planet.Biome.Pole:
 			rand = randi() % tiles.get_child_count()
 		
 		city_tiles_i.append(rand)

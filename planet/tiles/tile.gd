@@ -16,6 +16,7 @@ var temperature_ratio
 
 signal unselect_tiles
 signal city_selected
+signal biome_changed
 
 func _ready():
 	var mat = SpatialMaterial.new()
@@ -28,6 +29,14 @@ func _ready():
 
 func _process(delta):
 	determine_biome()
+#	if city:
+#		var normal = get_face_normal()
+#		var axis = Vector3.UP.cross(normal)
+#		var theta = acos(Vector3.UP.dot(normal))
+#
+#		city.rotate_object_local(axis, 0.1)
+#		city.scale = Vector3(1, 1, 1)
+
 
 func init():
 	area = $area
@@ -42,17 +51,20 @@ func init():
 
 func init_city():
 	city = $city
+	city.init(self)
 	var model = $city/model
 	var up = Vector3.UP # the model's normal
-	city.translation = get_face_center() * 1.1
+	city.transform.origin = get_face_center() * 1.1
 	
 	var normal = get_face_normal()
-	var axis = up.cross(normal)
+	var axis = up.cross(normal).normalized()
 	var theta = acos(up.dot(normal))
 	
-	printt(normal, axis, theta)
+	printt(axis, theta)
 	
-#	city.transform = city.transform.rotated(axis, theta)
+	city.rotate_object_local(axis, theta)
+	city.scale = Vector3(1, 1, 1)
+
 
 func get_face_center():
 	var sum = Vector3.ZERO
@@ -87,6 +99,8 @@ func determine_biome():
 		col = Color(1, 1, 1)
 	elif altitude <= Planet.water_level:
 		new_biome = Planet.Biome.Ocean
+		if city:
+			city.destroy()
 		col = Color(.5, .5, 1)
 	else:
 		new_biome = Planet.Biome.Ground
@@ -95,6 +109,7 @@ func determine_biome():
 	if new_biome != biome:
 		biome = new_biome
 		tile_yield.set_values(Planet.get_tile_yield(biome))
+		emit_signal("biome_changed", self)
 	
 	mat.albedo_color = col
 	set_surface_material(0, mat)
