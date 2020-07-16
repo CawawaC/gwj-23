@@ -51,3 +51,6 @@ func on_launch_pressed():
 		var rocket = selected_tile.city.rocket
 		if rocket:
 			rocket.launch()
+
+func build_mode_mine():
+	selected_tile.city.build_improvement

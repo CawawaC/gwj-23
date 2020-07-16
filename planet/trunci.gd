@@ -31,9 +31,9 @@ func _ready():
 		
 		face.connect("unselect_tiles", self, "unselect_tiles")
 		
+	$tiles.find_adjacents()
 	$generator.generate()
 	
-	$tiles.find_adjacents()
 
 func unselect_tiles():
 	for face in tiles.get_children():
@@ -42,6 +42,6 @@ func unselect_tiles():
 func _input(event):
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(BUTTON_LEFT):
 		if event.relative != Vector2.ZERO:
-			var rot = Vector3(event.relative.y, event.relative.x, 1)
+			var rot = Vector3(1, event.relative.x, -event.relative.y)
 			rot = rot.normalized()
 			rotate(rot, event.speed.length()/10000)

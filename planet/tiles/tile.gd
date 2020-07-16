@@ -13,10 +13,12 @@ var mdt: MeshDataTool
 var adjacent_tiles
 var sides_count
 var temperature_ratio
+var tile_improvement
 
 signal unselect_tiles
 signal city_selected
 signal biome_changed
+signal tile_clicked
 
 func _ready():
 	var mat = SpatialMaterial.new()
@@ -63,6 +65,19 @@ func init_city():
 	city.rotate_object_local(axis, theta)
 	city.scale = Vector3(1, 1, 1)
 
+func build_improvement(improv):
+	tile_improvement = improv
+	add_child(tile_improvement)
+	
+	var up = Vector3.UP # the model's normal
+	tile_improvement.transform.origin = get_face_center() * 1.1
+	
+	var normal = get_face_normal()
+	var axis = up.cross(normal).normalized()
+	var theta = acos(up.dot(normal))
+	
+	tile_improvement.rotate_object_local(axis, theta)
+	tile_improvement.scale = Vector3(1, 1, 1)
 
 func get_face_center():
 	var sum = Vector3.ZERO
@@ -76,17 +91,21 @@ func get_face_normal():
 
 func on_tile_clicked():
 	emit_signal("unselect_tiles")
+	emit_signal("tile_clicked")
 	select()
 
 func select():
 	material_override = selected_material
 	if city:
 		emit_signal("city_selected", self)
+		city.paint_influence()
 #	for a in adjacent_tiles:
 #		a.material_override = selected_material
 
 func unselect():
 	material_override = null
+	if city:
+		city.erase_influence()
 
 func determine_biome():
 	var mat = get_surface_material(0)

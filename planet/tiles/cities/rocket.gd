@@ -4,10 +4,13 @@ class_name Rocket
 
 enum State { Building, Built }
 
-export (float) var building_speed = 1
+export (float) var building_speed = 0.01
 export (float) var capacity = 1.0 # millions
+export (int) var required_production = 5
+
 
 var built_ratio := 0.0
+var build_start_time
 var city
 var state
 
@@ -16,9 +19,10 @@ func _ready():
 
 func init(c):
 	city = c
+	build_start_time = Time.get_time()
 
 func _process(delta):
-	built_ratio += delta * building_speed
+	built_ratio = (Time.get_time() - build_start_time) * building_speed
 	if built_ratio >= 1.0:
 		built_ratio = 1.0
 		state = State.Built

@@ -41,6 +41,7 @@ config/icon="res://icon.png"
 Time="*res://Time.gd"
 Planet="*res://Planet.tscn"
 Player="*res://Player.gd"
+ImprovementsFactory="*res://planet/tiles/improvements/factory.tscn"
 
 [input]
 

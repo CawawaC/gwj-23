@@ -1,5 +1,7 @@
 extends Spatial
 
+export (SpatialMaterial) var influence_outline_material
+
 onready var rocket = $rocket
 onready var total_yield = $yield setget , get_total_yield
 
@@ -7,8 +9,9 @@ var tile
 var population:float # millions
 var min_pop = 10 # millions
 var max_pop = 30 # millions
-signal city_destroyed
+var influenced_tiles:Array
 
+signal city_destroyed
 signal rocket_progress
 
 
@@ -22,6 +25,23 @@ func _process(delta):
 
 func init(t):
 	tile = t
+	influenced_tiles = tile.adjacent_tiles.duplicate()
+	influenced_tiles.append(tile)
+
+func paint_influence():
+	for i in influenced_tiles:
+		var tile_mat = i.get_surface_material(0) as SpatialMaterial
+		tile_mat.next_pass = influence_outline_material
+		i.set_surface_material(0, tile_mat)
+
+func erase_influence():
+	for i in influenced_tiles:
+		var tile_mat = i.get_surface_material(0) as SpatialMaterial
+		tile_mat.next_pass = null
+		i.set_surface_material(0, tile_mat)
+
+func build_improvement(tile, improvement):
+	tile.build_improvement(improvement.duplicate())
 
 func destroy():
 	Player.population_dead += population

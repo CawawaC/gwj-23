@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://planet/trunci.tscn" type="PackedScene" id=1]
 [ext_resource path="res://planet/tiles/yields/MelonWhiteborder2 icon.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://game.gd" type="Script" id=5]
 [ext_resource path="res://ui/city ui.gd" type="Script" id=6]
 [ext_resource path="res://ui/info.gd" type="Script" id=7]
+[ext_resource path="res://models/rabbitsHiRes.png" type="Texture" id=8]
+[ext_resource path="res://planet/tiles/improvements/build mode.gd" type="Script" id=9]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -15,13 +17,22 @@ colors = PoolColorArray( 0.337255, 0.337255, 0.337255, 0.803922 )
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
 
+[sub_resource type="PanoramaSky" id=3]
+panorama = ExtResource( 8 )
+
+[sub_resource type="Environment" id=4]
+background_mode = 2
+background_sky = SubResource( 3 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+fog_enabled = true
+
 [node name="game" type="Spatial"]
 script = ExtResource( 5 )
 
 [node name="trunci" parent="." instance=ExtResource( 1 )]
 
 [node name="camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.15454 )
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 9.155, 0, 0 )
 fov = 81.9456
 
 [node name="ui" type="CanvasLayer" parent="."]
@@ -138,7 +149,6 @@ margin_left = 120.0
 margin_right = 220.0
 margin_bottom = 14.0
 rect_min_size = Vector2( 100, 0 )
-max_value = 100.0
 step = 1.0
 
 [node name="launch" type="Button" parent="ui/ui/city/construction/rocket"]
@@ -148,7 +158,43 @@ margin_bottom = 20.0
 disabled = true
 text = "launch"
 
+[node name="polder" type="HBoxContainer" parent="ui/ui/city/construction"]
+margin_top = 24.0
+margin_right = 278.0
+margin_bottom = 44.0
+
+[node name="build" type="Button" parent="ui/ui/city/construction/polder"]
+margin_right = 101.0
+margin_bottom = 20.0
+text = "Build a polder"
+script = ExtResource( 9 )
+improvement = 2
+
+[node name="farm" type="HBoxContainer" parent="ui/ui/city/construction"]
+margin_top = 48.0
+margin_right = 278.0
+margin_bottom = 68.0
+
+[node name="build" type="Button" parent="ui/ui/city/construction/farm"]
+margin_right = 89.0
+margin_bottom = 20.0
+text = "Build a farm"
+script = ExtResource( 9 )
+improvement = 1
+
+[node name="mine" type="HBoxContainer" parent="ui/ui/city/construction"]
+margin_top = 72.0
+margin_right = 278.0
+margin_bottom = 92.0
+
+[node name="build" type="Button" parent="ui/ui/city/construction/mine"]
+margin_right = 93.0
+margin_bottom = 20.0
+text = "Build a mine"
+script = ExtResource( 9 )
+
 [node name="defeat" type="Control" parent="ui/ui"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -160,6 +206,31 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = SubResource( 2 )
 expand = true
+
+[node name="lost" type="HBoxContainer" parent="ui/ui/defeat/bg"]
+margin_left = 421.0
+margin_top = 332.0
+margin_right = 602.0
+margin_bottom = 346.0
+
+[node name="label" type="Label" parent="ui/ui/defeat/bg/lost"]
+margin_right = 4.0
+margin_bottom = 14.0
+size_flags_horizontal = 13
+text = "("
+
+[node name="num" type="Label" parent="ui/ui/defeat/bg/lost"]
+margin_left = 8.0
+margin_right = 16.0
+margin_bottom = 14.0
+size_flags_horizontal = 13
+text = "0"
+
+[node name="people" type="Label" parent="ui/ui/defeat/bg/lost"]
+margin_left = 20.0
+margin_right = 121.0
+margin_bottom = 14.0
+text = "milllion people)"
 
 [node name="center" type="CenterContainer" parent="ui/ui/defeat"]
 anchor_right = 1.0
@@ -220,21 +291,11 @@ margin_right = 181.0
 margin_bottom = 14.0
 text = "milllion people"
 
-[node name="lost" type="HBoxContainer" parent="ui/ui/defeat/center/vbox"]
+[node name="drama" type="Label" parent="ui/ui/defeat/center/vbox"]
 margin_top = 60.0
 margin_right = 181.0
 margin_bottom = 74.0
-
-[node name="num" type="Label" parent="ui/ui/defeat/center/vbox/lost"]
-margin_right = 8.0
-margin_bottom = 14.0
-text = "0"
-
-[node name="people" type="Label" parent="ui/ui/defeat/center/vbox/lost"]
-margin_left = 12.0
-margin_right = 141.0
-margin_bottom = 14.0
-text = "milllion people died"
+text = "Everyone else died."
 
 [node name="info" type="VBoxContainer" parent="ui/ui"]
 anchor_left = 1.0
@@ -290,4 +351,7 @@ margin_left = 174.0
 margin_right = 182.0
 margin_bottom = 14.0
 text = "0"
+
+[node name="world" type="WorldEnvironment" parent="."]
+environment = SubResource( 4 )
 [connection signal="pressed" from="ui/ui/city/construction/rocket/launch" to="ui/ui/city" method="on_launch_pressed"]
