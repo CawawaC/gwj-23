@@ -31,8 +31,8 @@ surfaces/1 = {
 "vertex_count": 428
 }
 
-[node name="oilField006" type="MeshInstance"]
-transform = Transform( -180.629, -75.2592, -99.1322, 121.97, -141.828, -114.567, -24.7884, -149.461, 158.634, 0, 0, 0 )
+[node name="mine" type="MeshInstance"]
+transform = Transform( -12.3517, -5.14631, -6.77881, 8.34047, -9.69844, -7.83434, -1.69506, -10.2204, 10.8476, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = null
 material/1 = null

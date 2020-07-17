@@ -31,14 +31,6 @@ func _ready():
 
 func _process(delta):
 	determine_biome()
-#	if city:
-#		var normal = get_face_normal()
-#		var axis = Vector3.UP.cross(normal)
-#		var theta = acos(Vector3.UP.dot(normal))
-#
-#		city.rotate_object_local(axis, 0.1)
-#		city.scale = Vector3(1, 1, 1)
-
 
 func init():
 	area = $area
@@ -62,22 +54,22 @@ func init_city():
 	var axis = up.cross(normal).normalized()
 	var theta = acos(up.dot(normal))
 	
-	city.rotate_object_local(axis, theta)
+	city.rotate(axis, theta)
 	city.scale = Vector3(1, 1, 1)
 
 func build_improvement(improv):
 	tile_improvement = improv
 	add_child(tile_improvement)
 	
-	var up = Vector3.UP # the model's normal
+	var up = Vector3.UP # the model's up
 	tile_improvement.transform.origin = get_face_center() * 1.1
 	
 	var normal = get_face_normal()
 	var axis = up.cross(normal).normalized()
 	var theta = acos(up.dot(normal))
 	
-	tile_improvement.rotate_object_local(axis, theta)
-	tile_improvement.scale = Vector3(1, 1, 1)
+	tile_improvement.rotate(axis, theta)
+#	tile_improvement.scale = Vector3(1, 1, 1)
 
 func get_face_center():
 	var sum = Vector3.ZERO
@@ -91,7 +83,7 @@ func get_face_normal():
 
 func on_tile_clicked():
 	emit_signal("unselect_tiles")
-	emit_signal("tile_clicked")
+	emit_signal("tile_clicked", self)
 	select()
 
 func select():
