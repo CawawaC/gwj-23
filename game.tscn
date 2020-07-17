@@ -1,14 +1,22 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://planet/trunci.tscn" type="PackedScene" id=1]
 [ext_resource path="res://planet/tiles/yields/MelonWhiteborder2 icon.png" type="Texture" id=2]
-[ext_resource path="res://planet/tiles/yields/industry.png" type="Texture" id=3]
+[ext_resource path="res://planet/tiles/yields/industry icon.png" type="Texture" id=3]
 [ext_resource path="res://ui/ui.gd" type="Script" id=4]
 [ext_resource path="res://game.gd" type="Script" id=5]
 [ext_resource path="res://ui/city ui.gd" type="Script" id=6]
 [ext_resource path="res://ui/info.gd" type="Script" id=7]
 [ext_resource path="res://models/rabbitsHiRes.png" type="Texture" id=8]
 [ext_resource path="res://planet/tiles/improvements/build mode.gd" type="Script" id=9]
+[ext_resource path="res://ui/hud.theme.tres" type="Theme" id=10]
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 0, 0, 0, 0.376471 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -23,8 +31,14 @@ panorama = ExtResource( 8 )
 [sub_resource type="Environment" id=4]
 background_mode = 2
 background_sky = SubResource( 3 )
-ambient_light_color = Color( 1, 1, 1, 1 )
-fog_enabled = true
+background_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+background_energy = 0.65
+ambient_light_energy = 2.05
+ambient_light_sky_contribution = 0.95
+fog_color = Color( 0.556863, 0.584314, 0.611765, 1 )
+dof_blur_far_enabled = true
+dof_blur_far_distance = 335.59
+glow_enabled = true
 
 [node name="game" type="Spatial"]
 script = ExtResource( 5 )
@@ -42,6 +56,7 @@ script = ExtResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+theme = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -55,9 +70,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="bg" type="TextureRect" parent="ui/ui/city"]
+margin_left = 117.0
+margin_top = -253.0
+margin_right = 201.0
+margin_bottom = 117.0
+rect_rotation = 90.0
+rect_pivot_offset = Vector2( 0.0343214, 252.935 )
+texture = SubResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="resources" type="HBoxContainer" parent="ui/ui/city"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 468.0
+margin_bottom = 70.0
 mouse_filter = 2
 custom_constants/separation = 19
 __meta__ = {
@@ -65,7 +93,7 @@ __meta__ = {
 }
 
 [node name="food" type="HBoxContainer" parent="ui/ui/city/resources"]
-margin_right = 76.0
+margin_right = 77.0
 margin_bottom = 70.0
 mouse_filter = 2
 __meta__ = {
@@ -80,14 +108,14 @@ texture = ExtResource( 2 )
 
 [node name="num" type="Label" parent="ui/ui/city/resources/food"]
 margin_left = 68.0
-margin_top = 28.0
-margin_right = 76.0
-margin_bottom = 42.0
+margin_top = 26.0
+margin_right = 77.0
+margin_bottom = 43.0
 text = "6"
 
 [node name="industry" type="HBoxContainer" parent="ui/ui/city/resources"]
-margin_left = 95.0
-margin_right = 171.0
+margin_left = 96.0
+margin_right = 179.0
 margin_bottom = 70.0
 mouse_filter = 2
 __meta__ = {
@@ -95,34 +123,36 @@ __meta__ = {
 }
 
 [node name="icon" type="TextureRect" parent="ui/ui/city/resources/industry"]
-margin_right = 64.0
+margin_right = 70.0
 margin_bottom = 70.0
 mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 texture = ExtResource( 3 )
 
 [node name="num" type="Label" parent="ui/ui/city/resources/industry"]
-margin_left = 68.0
-margin_top = 28.0
-margin_right = 76.0
-margin_bottom = 42.0
+margin_left = 74.0
+margin_top = 26.0
+margin_right = 83.0
+margin_bottom = 43.0
 text = "6"
 
 [node name="population" type="HBoxContainer" parent="ui/ui/city/resources"]
-margin_left = 190.0
-margin_right = 314.0
+margin_left = 198.0
+margin_right = 338.0
 margin_bottom = 70.0
 
 [node name="label" type="Label" parent="ui/ui/city/resources/population"]
-margin_top = 28.0
-margin_right = 76.0
-margin_bottom = 42.0
+margin_top = 26.0
+margin_right = 87.0
+margin_bottom = 43.0
 text = "Population: "
 
 [node name="num" type="Label" parent="ui/ui/city/resources/population"]
-margin_left = 80.0
-margin_top = 28.0
-margin_right = 124.0
-margin_bottom = 42.0
+margin_left = 91.0
+margin_top = 26.0
+margin_right = 140.0
+margin_bottom = 43.0
 text = "10.000"
 
 [node name="construction" type="VBoxContainer" parent="ui/ui/city"]
@@ -135,61 +165,61 @@ __meta__ = {
 }
 
 [node name="rocket" type="HBoxContainer" parent="ui/ui/city/construction"]
-margin_right = 278.0
-margin_bottom = 20.0
+margin_right = 304.0
+margin_bottom = 23.0
 
 [node name="label" type="Label" parent="ui/ui/city/construction/rocket"]
 margin_top = 3.0
-margin_right = 116.0
-margin_bottom = 17.0
+margin_right = 137.0
+margin_bottom = 20.0
 text = "Rocket production"
 
 [node name="progress" type="ProgressBar" parent="ui/ui/city/construction/rocket"]
-margin_left = 120.0
-margin_right = 220.0
-margin_bottom = 14.0
+margin_left = 141.0
+margin_right = 241.0
+margin_bottom = 17.0
 rect_min_size = Vector2( 100, 0 )
 step = 1.0
 
 [node name="launch" type="Button" parent="ui/ui/city/construction/rocket"]
-margin_left = 224.0
-margin_right = 278.0
-margin_bottom = 20.0
+margin_left = 245.0
+margin_right = 304.0
+margin_bottom = 23.0
 disabled = true
 text = "launch"
 
 [node name="polder" type="HBoxContainer" parent="ui/ui/city/construction"]
-margin_top = 24.0
-margin_right = 278.0
-margin_bottom = 44.0
+margin_top = 27.0
+margin_right = 304.0
+margin_bottom = 50.0
 
 [node name="build" type="Button" parent="ui/ui/city/construction/polder"]
-margin_right = 101.0
-margin_bottom = 20.0
+margin_right = 114.0
+margin_bottom = 23.0
 text = "Build a polder"
 script = ExtResource( 9 )
 improvement = 2
 
 [node name="farm" type="HBoxContainer" parent="ui/ui/city/construction"]
-margin_top = 48.0
-margin_right = 278.0
-margin_bottom = 68.0
+margin_top = 54.0
+margin_right = 304.0
+margin_bottom = 77.0
 
 [node name="build" type="Button" parent="ui/ui/city/construction/farm"]
-margin_right = 89.0
-margin_bottom = 20.0
+margin_right = 98.0
+margin_bottom = 23.0
 text = "Build a farm"
 script = ExtResource( 9 )
 improvement = 1
 
 [node name="mine" type="HBoxContainer" parent="ui/ui/city/construction"]
-margin_top = 72.0
-margin_right = 278.0
-margin_bottom = 92.0
+margin_top = 81.0
+margin_right = 304.0
+margin_bottom = 104.0
 
 [node name="build" type="Button" parent="ui/ui/city/construction/mine"]
-margin_right = 93.0
-margin_bottom = 20.0
+margin_right = 101.0
+margin_bottom = 23.0
 text = "Build a mine"
 script = ExtResource( 9 )
 
@@ -206,31 +236,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = SubResource( 2 )
 expand = true
-
-[node name="lost" type="HBoxContainer" parent="ui/ui/defeat/bg"]
-margin_left = 421.0
-margin_top = 332.0
-margin_right = 602.0
-margin_bottom = 346.0
-
-[node name="label" type="Label" parent="ui/ui/defeat/bg/lost"]
-margin_right = 4.0
-margin_bottom = 14.0
-size_flags_horizontal = 13
-text = "("
-
-[node name="num" type="Label" parent="ui/ui/defeat/bg/lost"]
-margin_left = 8.0
-margin_right = 16.0
-margin_bottom = 14.0
-size_flags_horizontal = 13
-text = "0"
-
-[node name="people" type="Label" parent="ui/ui/defeat/bg/lost"]
-margin_left = 20.0
-margin_right = 121.0
-margin_bottom = 14.0
-text = "milllion people)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="center" type="CenterContainer" parent="ui/ui/defeat"]
 anchor_right = 1.0
@@ -240,70 +248,109 @@ __meta__ = {
 }
 
 [node name="vbox" type="VBoxContainer" parent="ui/ui/defeat/center"]
-margin_left = 421.0
-margin_top = 263.0
-margin_right = 602.0
-margin_bottom = 337.0
+margin_left = 409.0
+margin_top = 248.0
+margin_right = 614.0
+margin_bottom = 352.0
 
 [node name="label" type="Label" parent="ui/ui/defeat/center/vbox"]
-margin_right = 181.0
-margin_bottom = 14.0
+margin_right = 205.0
+margin_bottom = 17.0
 text = "No cities left: game over"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="pad" type="Control" parent="ui/ui/defeat/center/vbox"]
-margin_top = 18.0
-margin_right = 181.0
-margin_bottom = 38.0
+margin_top = 21.0
+margin_right = 205.0
+margin_bottom = 41.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_vertical = 3
 
 [node name="saved" type="HBoxContainer" parent="ui/ui/defeat/center/vbox"]
-margin_top = 42.0
-margin_right = 181.0
-margin_bottom = 56.0
+margin_top = 45.0
+margin_right = 205.0
+margin_bottom = 62.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="label" type="Label" parent="ui/ui/defeat/center/vbox/saved"]
-margin_right = 64.0
-margin_bottom = 14.0
+margin_right = 75.0
+margin_bottom = 17.0
 text = "You saved"
 
 [node name="pad" type="Control" parent="ui/ui/defeat/center/vbox/saved"]
-margin_left = 68.0
-margin_right = 68.0
-margin_bottom = 14.0
+margin_left = 79.0
+margin_right = 79.0
+margin_bottom = 17.0
 size_flags_horizontal = 3
 
 [node name="num" type="Label" parent="ui/ui/defeat/center/vbox/saved"]
-margin_left = 72.0
-margin_right = 80.0
-margin_bottom = 14.0
+margin_left = 83.0
+margin_right = 92.0
+margin_bottom = 17.0
 text = "0"
 
 [node name="people" type="Label" parent="ui/ui/defeat/center/vbox/saved"]
-margin_left = 84.0
-margin_right = 181.0
-margin_bottom = 14.0
+margin_left = 96.0
+margin_right = 205.0
+margin_bottom = 17.0
 text = "milllion people"
 
 [node name="drama" type="Label" parent="ui/ui/defeat/center/vbox"]
-margin_top = 60.0
-margin_right = 181.0
-margin_bottom = 74.0
+margin_top = 66.0
+margin_right = 205.0
+margin_bottom = 83.0
 text = "Everyone else died."
+
+[node name="lost" type="HBoxContainer" parent="ui/ui/defeat/center/vbox"]
+margin_top = 87.0
+margin_right = 205.0
+margin_bottom = 104.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="ui/ui/defeat/center/vbox/lost"]
+margin_right = 4.0
+margin_bottom = 17.0
+size_flags_horizontal = 13
+text = "("
+
+[node name="num" type="Label" parent="ui/ui/defeat/center/vbox/lost"]
+margin_left = 8.0
+margin_right = 17.0
+margin_bottom = 17.0
+size_flags_horizontal = 13
+text = "0"
+
+[node name="people" type="Label" parent="ui/ui/defeat/center/vbox/lost"]
+margin_left = 21.0
+margin_right = 134.0
+margin_bottom = 17.0
+text = "milllion people)"
+
+[node name="bg" type="TextureRect" parent="ui/ui"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_right = 90.0
+margin_bottom = 253.0
+rect_rotation = 90.0
+texture = SubResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="info" type="VBoxContainer" parent="ui/ui"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -202.0
+margin_left = -242.0
 margin_top = 20.0
-margin_right = -20.0
-margin_bottom = 52.0
+margin_right = -60.0
+margin_bottom = 79.0
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -311,67 +358,67 @@ __meta__ = {
 
 [node name="saved" type="HBoxContainer" parent="ui/ui/info"]
 margin_right = 182.0
-margin_bottom = 14.0
+margin_bottom = 17.0
 
 [node name="label" type="Label" parent="ui/ui/info/saved"]
-margin_right = 117.0
-margin_bottom = 14.0
+margin_right = 133.0
+margin_bottom = 17.0
 text = "Population saved: "
 
 [node name="pad2" type="Control" parent="ui/ui/info/saved"]
-margin_left = 121.0
-margin_right = 170.0
-margin_bottom = 14.0
+margin_left = 137.0
+margin_right = 169.0
+margin_bottom = 17.0
 size_flags_horizontal = 3
 
 [node name="num" type="Label" parent="ui/ui/info/saved"]
-margin_left = 174.0
+margin_left = 173.0
 margin_right = 182.0
-margin_bottom = 14.0
+margin_bottom = 17.0
 text = "0"
 
 [node name="remain" type="HBoxContainer" parent="ui/ui/info"]
-margin_top = 18.0
+margin_top = 21.0
 margin_right = 182.0
-margin_bottom = 32.0
+margin_bottom = 38.0
 
 [node name="label" type="Label" parent="ui/ui/info/remain"]
-margin_right = 144.0
-margin_bottom = 14.0
+margin_right = 164.0
+margin_bottom = 17.0
 text = "Population remaining: "
 
 [node name="pad2" type="Control" parent="ui/ui/info/remain"]
-margin_left = 148.0
-margin_right = 170.0
-margin_bottom = 14.0
+margin_left = 168.0
+margin_right = 169.0
+margin_bottom = 17.0
 size_flags_horizontal = 3
 
 [node name="num" type="Label" parent="ui/ui/info/remain"]
-margin_left = 174.0
+margin_left = 173.0
 margin_right = 182.0
-margin_bottom = 14.0
+margin_bottom = 17.0
 text = "0"
 
 [node name="lost" type="HBoxContainer" parent="ui/ui/info"]
-margin_top = 36.0
+margin_top = 42.0
 margin_right = 182.0
-margin_bottom = 50.0
+margin_bottom = 59.0
 
 [node name="label" type="Label" parent="ui/ui/info/lost"]
-margin_right = 104.0
-margin_bottom = 14.0
+margin_right = 118.0
+margin_bottom = 17.0
 text = "Population lost: "
 
 [node name="pad" type="Control" parent="ui/ui/info/lost"]
-margin_left = 108.0
-margin_right = 170.0
-margin_bottom = 14.0
+margin_left = 122.0
+margin_right = 169.0
+margin_bottom = 17.0
 size_flags_horizontal = 3
 
 [node name="num" type="Label" parent="ui/ui/info/lost"]
-margin_left = 174.0
+margin_left = 173.0
 margin_right = 182.0
-margin_bottom = 14.0
+margin_bottom = 17.0
 text = "0"
 
 [node name="world" type="WorldEnvironment" parent="."]

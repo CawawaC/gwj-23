@@ -22,6 +22,17 @@ func _ready():
 func _process(delta):
 	if rocket:
 		emit_signal("rocket_progress", rocket.built_ratio)
+	
+	die_some(delta)
+
+func die_some(delta):
+	var death_rate = 0.0001 * (Planet.deadliness -  get_total_yield().food / population)
+	var deaths = population * death_rate * delta
+	population -= min(deaths, population)
+	Player.population_dead += deaths
+	if population <= 0:
+		population = 0
+		destroy()
 
 func init(t):
 	tile = t

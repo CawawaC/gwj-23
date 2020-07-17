@@ -55,7 +55,6 @@ func init_city():
 	var theta = acos(up.dot(normal))
 	
 	city.rotate(axis, theta)
-	city.scale = Vector3(1, 1, 1)
 
 func build_improvement(improv):
 	tile_improvement = improv
@@ -71,7 +70,6 @@ func build_improvement(improv):
 	tile_improvement.rotate(axis, theta)
 	
 	tile_yield.register_complement(tile_improvement.improvement_yield)
-#	tile_improvement.scale = Vector3(1, 1, 1)
 
 func get_face_center():
 	var sum = Vector3.ZERO

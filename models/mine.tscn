@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://models/planet lowpoly/Material_004.material" type="Material" id=1]
 [ext_resource path="res://models/planet lowpoly/Material_018.material" type="Material" id=2]
@@ -35,11 +35,17 @@ surfaces/1 = {
 "vertex_count": 428
 }
 
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.85098, 0.552941, 0.172549, 1 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 1, 1, 0.262745, 1 )
+
 [node name="mine" type="MeshInstance"]
-transform = Transform( -12.3517, -5.14631, -6.77881, 8.34047, -9.69844, -7.83434, -1.69506, -10.2204, 10.8476, 0, 0, 0 )
+transform = Transform( -24.7033, -10.2926, -13.5576, 16.6809, -19.3969, -15.6687, -3.39011, -20.4408, 21.6952, 0, 0, 0 )
 mesh = SubResource( 1 )
-material/0 = null
-material/1 = null
+material/0 = SubResource( 2 )
+material/1 = SubResource( 3 )
 script = ExtResource( 6 )
 
 [node name="yield" type="Spatial" parent="."]

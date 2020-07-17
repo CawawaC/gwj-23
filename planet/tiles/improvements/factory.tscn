@@ -1,12 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://models/mine.tscn" type="PackedScene" id=1]
 [ext_resource path="res://planet/tiles/improvements/factory.gd" type="Script" id=2]
-[ext_resource path="res://planet/tiles/improvements/mine.gd" type="Script" id=3]
 
 [node name="factory" type="Spatial"]
 script = ExtResource( 2 )
 
 [node name="mine" parent="." instance=ExtResource( 1 )]
-transform = Transform( -4.11722, -1.71543, -2.2596, 2.78016, -3.23281, -2.61145, -0.565021, -3.40679, 3.61587, 0, 0, 0 )
-script = ExtResource( 3 )
+transform = Transform( -9.35182, -4.19799, -6.23861, 7.33824, -7.26801, -6.10951, -1.64122, -8.5763, 8.23126, 0, 0.00406978, 0.0016279 )

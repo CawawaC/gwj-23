@@ -5,6 +5,7 @@ enum Biome { Ocean, Ground, Pole }
 var water_level # 0 to 1
 var water_rise_speed = 0.0001 # water level per second
 #var water_rise_speed = 0.1 # debug
+var deadliness = 5.0
 
 var north_pole
 var south_pole

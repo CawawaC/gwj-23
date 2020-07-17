@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://planet/tiles/cities/city mesh.tscn" type="PackedScene" id=1]
 [ext_resource path="res://planet/tiles/cities/city.gd" type="Script" id=2]
@@ -14,13 +14,29 @@ params_grow = true
 params_grow_amount = 0.001
 albedo_color = Color( 1, 1, 1, 0.133333 )
 
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.752941, 0.752941, 0.752941, 1 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 1, 0.905882, 0.407843, 1 )
+emission_enabled = true
+emission = Color( 0.85098, 0.839216, 0.690196, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SpatialMaterial" id=4]
+params_cull_mode = 2
+
 [node name="city" type="Spatial"]
 script = ExtResource( 2 )
 influence_outline_material = SubResource( 1 )
 
-[node name="icon" type="Sprite3D" parent="."]
-
 [node name="model" parent="." instance=ExtResource( 1 )]
+transform = Transform( 3.97774, 0.213869, 0.363092, -0.352181, -0.205364, 3.97917, 0.231396, -3.989, -0.185391, 0.0057902, 0, -0.00167107 )
+material/0 = SubResource( 2 )
+material/1 = SubResource( 3 )
+material/2 = SubResource( 4 )
 
 [node name="rocket" type="Spatial" parent="."]
 script = ExtResource( 3 )

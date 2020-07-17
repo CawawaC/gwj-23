@@ -3,6 +3,6 @@
 [ext_resource path="res://planet/tiles/yields/industry.png" type="Texture" id=1]
 
 [node name="industry" type="Sprite3D"]
-transform = Transform( 0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0 )
+transform = Transform( 0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0 )
 billboard = 1
 texture = ExtResource( 1 )
