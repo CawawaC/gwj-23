@@ -40,8 +40,26 @@ func unselect_tiles():
 		face.unselect()
 
 func _input(event):
-	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(BUTTON_LEFT):
-		if event.relative != Vector2.ZERO:
-			var rot = Vector3(1, event.relative.x, -event.relative.y)
-			rot = rot.normalized()
-			rotate(rot, event.speed.length()/10000)
+	if event is InputEventMouseMotion:
+		if Input.is_mouse_button_pressed(BUTTON_LEFT):
+			if event.relative != Vector2.ZERO:
+				var rot = Vector3(1, event.relative.x, -event.relative.y)
+				rot = rot.normalized()
+				rotate(rot, event.speed.length()/10000)
+	elif event is InputEventMouseButton and event.is_pressed():
+		var trans = 1
+		var pos = $"../camera".translation
+		if event.button_index == BUTTON_WHEEL_UP:
+			# zoom in
+			if pos.x > 25:
+				$"../camera".translation.x = 25
+			else: 
+				$"../camera".translate_object_local(Vector3(0, 0, trans))
+			
+		elif event.button_index == BUTTON_WHEEL_DOWN:
+			# zoom in
+			if pos.x < 5:
+				$"../camera".translation.x = 5
+			else:
+				$"../camera".translate_object_local(Vector3(0, 0, -trans))
+		print($"../camera".translation)

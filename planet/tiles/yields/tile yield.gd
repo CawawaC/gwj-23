@@ -2,15 +2,16 @@ extends Spatial
 
 class_name TileYield
 
-export (int) var food
-export (int) var industry
+export (int) var food setget , get_food
+export (int) var industry setget , get_industry
 
 export (PackedScene) var food_icon
 export (PackedScene) var industry_icon
 
+var complements = [] # array of other tile yields
+
 func init():
 	update_icons()
-	layout()
 
 func layout():
 	var count = get_child_count()
@@ -26,18 +27,34 @@ func set_values(tile_yield):
 	
 	remove_icons()
 	update_icons()
-	
-	layout()
 
 func remove_icons():
 	for c in get_children():
 		c.queue_free()
 
 func update_icons():
-	instance_icons(food, food_icon)
-	instance_icons(industry, industry_icon)
+	remove_icons()
+	instance_icons(get_food(), food_icon)
+	instance_icons(get_industry(), industry_icon)
+	layout()
 
 func instance_icons(num, template):
 	for i in range(0, num):
 		var instance = template.instance()
 		add_child(instance)
+
+func register_complement(comp):
+	complements.append(comp)
+	update_icons()
+
+func get_food():
+	var sum = food
+	for c in complements:
+		sum += c.food
+	return sum
+
+func get_industry():
+	var sum = industry
+	for c in complements:
+		sum += c.industry
+	return sum

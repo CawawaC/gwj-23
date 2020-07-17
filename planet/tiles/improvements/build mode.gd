@@ -21,3 +21,4 @@ func exit_build_mode():
 	# remove all tiles' tile_clicked event connection to build
 	for tile in tiles.get_children():
 		tile.disconnect("tile_clicked", self, "build")
+	$"../../../../..".on_city_selected($"../../..".selected_tile)

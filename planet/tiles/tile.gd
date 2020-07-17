@@ -69,6 +69,8 @@ func build_improvement(improv):
 	var theta = acos(up.dot(normal))
 	
 	tile_improvement.rotate(axis, theta)
+	
+	tile_yield.register_complement(tile_improvement.improvement_yield)
 #	tile_improvement.scale = Vector3(1, 1, 1)
 
 func get_face_center():
