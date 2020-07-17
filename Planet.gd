@@ -2,11 +2,6 @@ extends Node
 
 enum Biome { Ocean, Ground, Pole } 
 
-#var biome_yields = {
-#	Biome.Ocean: TileYield.new(1, 1),
-#	Biome.Ground: TileYield.new(2, 1)
-#}
-
 var water_level # 0 to 1
 var water_rise_speed = 0.0001 # water level per second
 #var water_rise_speed = 0.1 # debug
@@ -27,5 +22,7 @@ func get_tile_yield(biome):
 			return $ocean
 		Biome.Ground:
 			return $ground
+		Biome.Pole:
+			return $pole
 	
 	return $default

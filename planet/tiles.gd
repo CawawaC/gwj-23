@@ -63,3 +63,10 @@ func get_cities_count():
 	for t in get_children():
 		if t.city: sum += 1
 	return sum
+
+func get_population_count():
+	var sum = 0.0
+	for t in get_children():
+		if t.city:
+			sum += t.city.population
+	return sum

@@ -330,10 +330,32 @@ margin_right = 182.0
 margin_bottom = 14.0
 text = "0"
 
-[node name="lost" type="HBoxContainer" parent="ui/ui/info"]
+[node name="remain" type="HBoxContainer" parent="ui/ui/info"]
 margin_top = 18.0
 margin_right = 182.0
 margin_bottom = 32.0
+
+[node name="label" type="Label" parent="ui/ui/info/remain"]
+margin_right = 144.0
+margin_bottom = 14.0
+text = "Population remaining: "
+
+[node name="pad2" type="Control" parent="ui/ui/info/remain"]
+margin_left = 148.0
+margin_right = 170.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="num" type="Label" parent="ui/ui/info/remain"]
+margin_left = 174.0
+margin_right = 182.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="lost" type="HBoxContainer" parent="ui/ui/info"]
+margin_top = 36.0
+margin_right = 182.0
+margin_bottom = 50.0
 
 [node name="label" type="Label" parent="ui/ui/info/lost"]
 margin_right = 104.0

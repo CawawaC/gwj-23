@@ -55,11 +55,9 @@ func _input(event):
 				$"../camera".translation.x = 25
 			else: 
 				$"../camera".translate_object_local(Vector3(0, 0, trans))
-			
 		elif event.button_index == BUTTON_WHEEL_DOWN:
 			# zoom in
 			if pos.x < 5:
 				$"../camera".translation.x = 5
 			else:
 				$"../camera".translate_object_local(Vector3(0, 0, -trans))
-		print($"../camera".translation)

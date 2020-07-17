@@ -29,7 +29,10 @@ func init(t):
 	influenced_tiles.append(tile)
 
 func paint_influence():
-	for i in influenced_tiles:
+	paint_influence_on_tiles(influenced_tiles)
+
+func paint_influence_on_tiles(ts):
+	for i in ts:
 		var tile_mat = i.get_surface_material(0) as SpatialMaterial
 		tile_mat.next_pass = influence_outline_material
 		i.set_surface_material(0, tile_mat)
